@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
+
+Auth::routes();
+
+Route::get('/account/dashboard', 'AccountController@index')->name('accnt_dashboard');
+Route::get('/account/profile', 'AccountController@profile')->name('accnt_profile');
+Route::post('/account/profile/submit_update', 'AccountController@profile_submit_update')->name('accnt_profile_submit_update');
