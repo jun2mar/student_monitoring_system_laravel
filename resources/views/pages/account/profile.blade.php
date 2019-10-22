@@ -10,13 +10,15 @@
                 <div class="card-header">
                     @if(Session::has('sucessUpdate'))
                         <div class="alert alert-success" role="alert">
-                            <strong>Successfully Updated</strong>
+                        <strong>Successfully Updated </strong>
                         </div>
                     @endisset
 
                     <legend>Profile Setting</legend>
-                    <form method="POST" action="{{ route('accnt_profile_submit_update') }}">
+                    <form method="POST" action="{{ route('accnt_profile_submit_update') }}" enctype="multipart/form-data">
                         @csrf
+
+                         <img src="{{ $profileIMG }}" class="img-fluid w-25 mb-3 mt-3" alt="">
 
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -53,6 +55,18 @@
                                 <label for="UserCountry">{{ __('Country') }}</label>
                                 <input type="text" name="UserCountry" id="UserCountry" class="form-control @error('UserCountry') is-invalid @enderror" value="{{ Auth::user()->UserCountry }}" placeholder="Country">
                                 @error('UserCountry')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="UserImage">{{ __('Profile Image') }}</label>
+                                <input type="file" name="UserImage" id="UserImage" class="form-control @error('UserImage') is-invalid @enderror">
+                                @error('UserImage')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
